@@ -1,25 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { ApolloProvider } from '@apollo/client';
+import CssBaseline from '@mui/material/CssBaseline';
+import Client from './api/client';
+import Header from './components/Header';
+import Ships from './components/Ships';
 
 function App() {
+  const [showGallery, setShowGallery] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={Client}>
+      <div className="App">
+        <CssBaseline />
+        <Header showGallery={showGallery} setShowGallery={setShowGallery} />
+        <Ships showGallery={showGallery} />
+      </div>
+    </ApolloProvider>
   );
 }
 
